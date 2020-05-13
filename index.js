@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const { exec } = require("child_process");
 const { readFileSync, writeFileSync } = require("fs");
 const serverBoilerplate = require("./serverBoilerplate");
@@ -19,7 +20,7 @@ const init = async () => {
   const steps = [
     {
       label: `Creating ${projectName} folder`,
-      cmd: `mkdir ${projectName} && cd ${projectName}`,
+      cmd: `mkdir ${projectName}`,
     },
     {
       label: `Creating React App - Go grab a drink 🍻`,
@@ -38,7 +39,7 @@ const init = async () => {
   addToPackageContents(
     `Adding Proxy config on React package.json file to route traffic to port ${PORT}`,
     `./${projectName}/client/package.json`,
-    { proxy: `localhost:${PORT}` }
+    { proxy: `http://localhost:${PORT}` }
   );
 
   addToPackageContents(
@@ -51,12 +52,12 @@ const init = async () => {
         "start:prod": "node server.js",
         "start:dev":
           'concurrently "nodemon --ignore \'client/*\'" "npm run client"',
+        client: "cd client && npm run start",
       },
-      client: "cd client && npm run start",
     }
   );
 
-  writeFileSync(`./${projectName}/server.js`, serverBoilerplate(PORT));
+  writeFileSync(`./${projectName}/index.js`, serverBoilerplate(PORT));
 
   console.log(
     `🚀 Created React Express App in ${projectName}
