@@ -12,4 +12,17 @@ _(Note: Port can not be 3000)_
 
 `npx create-react-express example-project 8080`
 
-![output screenshot](./docs/screenshot.png)
+```
+User@bizzybop01 % npx create-react-express example-project 8080
+npx: installed 30 in 3.291s
+✔ Creating example-project folder
+✔ Installing Server Depenancies
+✔ Creating React App - Go grab a drink 🍺
+✔ Adding Proxy config on React package.json file to route traffic to port 8080
+✔ Adding Start script to server npm package
+🚀Created React Express App in example-project
+
+    To start your app run:
+    cd example-project
+    npm start
+```
