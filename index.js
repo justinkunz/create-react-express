@@ -23,12 +23,12 @@ const init = async () => {
       cmd: `mkdir ${projectName}`,
     },
     {
-      label: `Creating React App - Go grab a drink 🍻`,
-      cmd: `cd ${projectName} && create-react-app client`,
-    },
-    {
       label: "Installing Server Depenancies",
       cmd: `cd ${projectName} && npm init -y && npm i express concurrently nodemon`,
+    },
+    {
+      label: `Creating React App - Go grab a drink 🍺`,
+      cmd: `cd ${projectName} && npx create-react-app client`,
     },
   ];
 
@@ -48,19 +48,20 @@ const init = async () => {
     {
       scripts: {
         start:
-          "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+          "npx if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
         "start:prod": "node server.js",
         "start:dev":
-          'concurrently "nodemon --ignore \'client/*\'" "npm run client"',
+          'npx concurrently "npx nodemon --ignore \'client/*\'" "npm run client"',
         client: "cd client && npm run start",
       },
+      c,
     }
   );
 
   writeFileSync(`./${projectName}/index.js`, serverBoilerplate(PORT));
 
   console.log(
-    `🚀 Created React Express App in ${projectName}
+    `🚀Created React Express App in ${projectName}
     
     To start your app run:
     cd ${projectName}
@@ -88,7 +89,7 @@ const addToPackageContents = (label, packagePath, changes) => {
     packageContents[c] = changes[c];
   }
 
-  writeFileSync(packagePath, JSON.stringify(packageContents));
+  writeFileSync(packagePath, JSON.stringify(packageContents, null, "\t"));
   log.succeed();
 };
 init();

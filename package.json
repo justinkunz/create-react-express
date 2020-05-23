@@ -1,6 +1,6 @@
 {
   "name": "create-react-express",
-  "version": "1.1.0",
+  "version": "1.2.3",
   "description": "Shortcut for making react/express apps",
   "main": "./index.js",
   "bin": {
